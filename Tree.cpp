@@ -10,13 +10,13 @@ Tree::Tree(Node n)
 {
     Troot=&n;
 }
-Node::Node()
-{
-    value=0;
-    right=left=NULL;
-    size1++;
-}
-Node::Node(int a)
+//Node::Node()
+//{
+//    value=0;
+//    right=left=NULL;
+ //   size1++;
+//}
+Node:: Node (int a)
 {
     size1++;
     value=a;
@@ -101,7 +101,7 @@ int Tree::HelpParent(Node* root,int a)
     Node* Tree:: insert (int a)
     {
         
-            Node n= new Node(a);
+            Node n(a);
 
             HelpInsert(Troot,n);
             return Troot;
