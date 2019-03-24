@@ -11,8 +11,8 @@ namespace ariel{
 	int value;
 	Node *left;
 	Node *right;
- Node();          //constractors
-  Node(int);
+   // Node();          //constractors
+    Node(int);
 	
 };
 
