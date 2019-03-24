@@ -57,7 +57,7 @@ int Tree::HelpParent(Node* root,int a)
            throw std::invalid_argument( "tree is empty" ); 
            return 0;
         } 
-    if(root->value==a){
+    if(Troot->value==a){
         throw std::invalid_argument( "the number is the root!" );
         return 0;
     }
@@ -103,10 +103,10 @@ int Tree::HelpParent(Node* root,int a)
         
             Node n= new Node(a);
 
-            HelpInsert(Troot,n);
+          return  HelpInsert(Troot,n);
         
     }
-     void Tree::HelpInsert(Node* main,Node NewNode)
+     Node * Tree::HelpInsert(Node* main,Node NewNode)
     {
         if(main==NULL) 
          {
@@ -114,11 +114,11 @@ int Tree::HelpParent(Node* root,int a)
          }
         else
         {
-          if(main->value>NewNode->value)
+          if(main->value>NewNode.value)
             {
               HelpInsert(main->left,NewNode);
             }
-          else if(main->value<NewNode->value)
+          else if(main->value<NewNode.value)
             {
                 HelpInsert(main->right,NewNode);
 
@@ -129,12 +129,12 @@ int Tree::HelpParent(Node* root,int a)
             }
 
         }
-
+return main;
     }
     
     int Tree:: root()
     {
-         return Troot->data;
+         return Troot->value;
     }
     void Tree:: remove (int a){
         
@@ -145,10 +145,10 @@ int Tree::HelpParent(Node* root,int a)
     { 
     if (root == NULL) return root; 
  
-    if (key < root->key) 
+    if (key < root->value) 
         root->left = HelpDelete(root->left, key); 
   
-    else if (key > root->key) 
+    else if (key > root->value) 
         root->right = HelpDelete(root->right, key); 
     else
     { 
@@ -168,8 +168,8 @@ int Tree::HelpParent(Node* root,int a)
             return temp; 
         } 
          Node* temp = minValueNode(root->right); 
-        root->key = temp->key; 
-        root->right = HelpDelete(root->right, temp->key); 
+        root->value = temp->value; 
+        root->right = HelpDelete(root->right, temp->value); 
     } 
     return root; 
 }
@@ -183,12 +183,12 @@ Node*  Tree:: minValueNode( Node* node)
     return current; 
 }
     bool Tree:: contains(int a){
-               return HelpContains(troot,a);
+               return HelpContains(Troot,a);
 
     }
      bool  Tree:: HelpContains(Node * root,int a)
    {
-       if(root==null)return false;
+       if(root==NULL)return false;
        else{
            if(a>root->value)HelpContains(root->right,a);
            else if(a<root->value)HelpContains(root->left,a);
