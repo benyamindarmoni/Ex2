@@ -98,15 +98,16 @@ int Tree::HelpParent(Node* root,int a)
        throw std::invalid_argument( "number doesnt exist!" );
         return 0;
     }
-    Node * Tree:: insert (int a)
+    Node* Tree:: insert (int a)
     {
         
             Node n= new Node(a);
 
-          return  HelpInsert(Troot,n);
+            HelpInsert(Troot,n);
+            return Troot;
         
     }
-     Node * Tree::HelpInsert(Node* main,Node NewNode)
+    void Tree::HelpInsert(Node* main,Node NewNode)
     {
         if(main==NULL) 
          {
@@ -125,11 +126,11 @@ int Tree::HelpParent(Node* root,int a)
             }
             else{
                 throw std::invalid_argument( "number already exist!" );
-                return;
+                
             }
 
         }
-return main;
+
     }
     
     int Tree:: root()
