@@ -5,11 +5,15 @@
 
 
 namespace ariel{
-  struct Node{
-    
+   
+  class Node{
+    public:
 	int value;
 	Node *left;
 	Node *right;
+ Node();          //constractors
+  Node(int);
+	
 };
 
 class Tree {
@@ -31,9 +35,13 @@ class Tree {
     void remove (int);
     bool contains(int);
     void print();
+    void HelpInsert(Node*,Node);
+    int HelpParent(Node * ,int );
+    Node* minValueNode( Node* ); 
+    Node* HelpDelete( Node* , int );
+    bool HelpContains(Node*,int);
     
     };
     
     
 }
-    
