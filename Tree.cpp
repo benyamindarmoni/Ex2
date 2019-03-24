@@ -25,9 +25,9 @@ Tree::Tree(Node n)
     {
         return 0;
     }
-    Tree& Tree:: insert (int a)
+    Node * Tree:: insert (int a)
     {
-        
+        return Troot;
     }
     int Tree:: root()
     {
@@ -40,5 +40,5 @@ Tree::Tree(Node n)
         return false;
     }
     void Tree:: print(){
-        return;
+       
     }
