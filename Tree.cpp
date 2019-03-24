@@ -28,72 +28,83 @@ Node::Node(int a)
 }
 int Tree::HelpParent(Node* root,int a)
 {
-   Node* h=root;
-    while(h->right->value!=a&&h->left->value!=a){
-        if(a>h->value)h=h->right;
-        else
-        h=h->left;
+    
+  Node *h=root;
+    Node *f=root;
+   
+    while(h!=NULL){
+        if(a>h->value){
+            f=h;
+            h=h->right;
+        }
+        else if(a<h->value){
+           f=h;
+             h=h->left;
+        }
+        else{
+            return f->value;
+        }
+       
     }
-    int ans=h->value;
+    
   //  delete(h);
-    return ans;
+  throw std::invalid_argument( "didnt found the number" ); 
+    return 0;
 }
     int Tree:: parent(int a)
     {
-        if(this.contains(a)&&Troot->data!=a){
+        if(Troot==NULL){
+           throw std::invalid_argument( "tree is empty" ); 
+           return 0;
+        } 
+    if(root->value==a){
+        throw std::invalid_argument( "the number is the root!" );
+        return 0;
+    }
             return HelpParent(Troot,a);
-        }
-       else{
-           throw std::invalid_argument( "number doesnt exist!" );
-       } 
-       return 0;
+       
+      
     }
     int Tree:: left(int a)
     {
-         if(!this.contains(a)) throw std::invalid_argument( "number doesnt exist!" );
-       else{
+        
            Node* h=Troot;
-           while(a!=h->value){
+           while(h!=NULL){
                if(a>h->value)h=h->right;
-               else
-               h=h->left;
+               else if(a<h->value) h=h->left;
+              else{
+                  return h->left->value;
+              }
            }
-           int ans= h->left->value;
-        //   delete(h);
-           return ans;
           
-       }
+           
+          
+       throw std::invalid_argument( "number doesnt exist!" );
         return 0;
     }
     int Tree:: right(int a)
     {
-        if(!this.contains(a)) throw std::invalid_argument( "number doesnt exist!" );
-       else{
-           Node* h=Troot;
-           while(a!=h->value){
+        Node* h=Troot;
+           while(h!=NULL){
                if(a>h->value)h=h->right;
-               else
-               h=h->left;
+               else if(a<h->value) h=h->left;
+              else{
+                  return h->right->value;
+              }
            }
-           int ans= h->right->value;
-         //  delete(h);
-           return ans;
-       }
+          
+           
+          
+       throw std::invalid_argument( "number doesnt exist!" );
         return 0;
     }
     Node * Tree:: insert (int a)
     {
-         if(this.contains(a))
-
-        {
-            throw std::invalid_argument( "already exist!" );
-        }
-        else
-        {
+        
             Node n= new Node(a);
 
             HelpInsert(Troot,n);
-        }
+        
     }
      void Tree::HelpInsert(Node* main,Node NewNode)
     {
@@ -107,11 +118,15 @@ int Tree::HelpParent(Node* root,int a)
             {
               HelpInsert(main->left,NewNode);
             }
-          else
+          else if(main->value<NewNode->value)
             {
                 HelpInsert(main->right,NewNode);
 
-            }    
+            }
+            else{
+                throw std::invalid_argument( "number already exist!" );
+                return;
+            }
 
         }
 
@@ -122,10 +137,9 @@ int Tree::HelpParent(Node* root,int a)
          return Troot->data;
     }
     void Tree:: remove (int a){
-        if(contains(a)){
-            size1--;
+        
         HelpDelete(  Troot, a); 
-        }
+        
     }
      Node* Tree:: HelpDelete( Node* root, int key) 
     { 
@@ -142,12 +156,15 @@ int Tree::HelpParent(Node* root,int a)
     { 
              Node *temp = root->right; 
             delete(root); 
+            size1--;
             return temp; 
         } 
         else if (root->right == NULL) 
         { 
              Node *temp = root->left; 
             delete(root); 
+                        size1--;
+
             return temp; 
         } 
          Node* temp = minValueNode(root->right); 
