@@ -1,4 +1,4 @@
-
+//Benyamon Darmoni , Danielle Zand
 #include "Tree.hpp"
 using namespace ariel;
 Tree::Tree()
