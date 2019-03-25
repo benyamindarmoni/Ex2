@@ -1,7 +1,8 @@
 //Benyamon Darmoni , Danielle Zand
 #include "Tree.hpp"
+using namespace std;
 using namespace ariel;
- static int size1=0;
+  int size1=0;
 Tree::Tree()
 {
     Troot=NULL;
@@ -48,17 +49,17 @@ int Tree::HelpParent(Node* root,int a)
     }
     
   //  delete(h);
-  throw std::invalid_argument( "didnt found the number" ); 
+ // throw std::invalid_argument( "didnt found the number" ); 
     return 0;
 }
     int Tree:: parent(int a)
     {
         if(Troot==NULL){
-           throw std::invalid_argument( "tree is empty" ); 
+        //   throw std::invalid_argument( "tree is empty" ); 
            return 0;
         } 
     if(Troot->value==a){
-        throw std::invalid_argument( "the number is the root!" );
+       // throw std::invalid_argument( "the number is the root!" );
         return 0;
     }
             return HelpParent(Troot,a);
@@ -79,7 +80,7 @@ int Tree::HelpParent(Node* root,int a)
           
            
           
-       throw std::invalid_argument( "number doesnt exist!" );
+     //  throw std::invalid_argument( "number doesnt exist!" );
         return 0;
     }
     int Tree:: right(int a)
@@ -95,38 +96,41 @@ int Tree::HelpParent(Node* root,int a)
           
            
           
-       throw std::invalid_argument( "number doesnt exist!" );
+     //  throw std:: invalid_argument( "number doesnt exist!" );
         return 0;
     }
     Node* Tree:: insert (int a)
     {
         
-            Node n(a);
+            Node* n=new Node(a);
 
-            HelpInsert(Troot,n);
+            HelpInsert(&Troot,&n);
             return Troot;
         
     }
-    void Tree::HelpInsert(Node* main,Node NewNode)
+    void Tree::HelpInsert(Node** main,Node** NewNode)
     {
-        if(main==NULL) 
+        if(*main==NULL) 
          {
-         main=&NewNode;
+         *main=new Node((**NewNode).value);
+         size1--;
+         delete(*NewNode);
          }
         else
         {
-          if(main->value>NewNode.value)
+          if((*main)->value>(*NewNode)->value)
             {
-              HelpInsert(main->left,NewNode);
+              HelpInsert(&((*main)->left),NewNode);
             }
-          else if(main->value<NewNode.value)
+          else if((*main)->value<(*NewNode)->value)
             {
-                HelpInsert(main->right,NewNode);
+                HelpInsert(&((*main)->right),NewNode);
 
             }
             else{
-                throw std::invalid_argument( "number already exist!" );
-                
+                //throw std::invalid_argument( "number already exist!" );
+                size1--;
+                int a=0;
             }
 
         }
@@ -138,65 +142,128 @@ int Tree::HelpParent(Node* root,int a)
          return Troot->value;
     }
     void Tree:: remove (int a){
-        
-        HelpDelete(  Troot, a); 
-        
+       
+        if(Troot!=NULL) 
+        HelpDelete(Troot, a); 
     }
-     Node* Tree:: HelpDelete( Node* root, int key) 
-    { 
-    if (root == NULL) return root; 
- 
-    if (key < root->value) 
-        root->left = HelpDelete(root->left, key); 
+    void Tree:: HelpDelete(Node* root, int d) 
+    {
+        Node* h=root;
+        Node* t=root;
+        while(h!=NULL){
+            if(d>h->value)
+            {
+                t=h;
+                h=h->right;
+        }
+        else if(d<h->value){
+             t=h;
+                h=h->left;
+        }
+        else{
+            if(h->left==NULL&&h->right==NULL){
+                delete(h);
+                size1--;
+                h=NULL;
+            }
+            else if(h->left==NULL){
+               if(t->right->value==h->value){
+                  t->right=h->right;
+                   delete(h);
+                size1--;
+                h=NULL;
+               }
+                 else{
+                     t->left=h->right;
+                   delete(h);
+                size1--;
+                h=NULL; 
+                 }
+            }
+            else if(h->right==NULL){
+               if(t->right->value==h->value){
+                  t->right=h->left;
+                   delete(h);
+                size1--;
+                h=NULL;
+               }
+                 else{
+                     t->left=h->left;
+                   delete(h);
+                size1--;
+                h=NULL; 
+                 }
+            }
+            else{//2 kids
+             t=Max(h->left);
+              h->value=t->value;
+              size1--;
+             if(t->left!=NULL){
+             t->value=t->left->value;
+              delete(t->left);
+             }
+             else
+             delete(t);
+            }
+        }
   
-    else if (key > root->value) 
-        root->right = HelpDelete(root->right, key); 
-    else
-    { 
-        if (root->left == NULL) 
-    { 
-             Node *temp = root->right; 
-            delete(root); 
-            size1--;
-            return temp; 
-        } 
-        else if (root->right == NULL) 
-        { 
-             Node *temp = root->left; 
-            delete(root); 
-                        size1--;
+        }}
 
-            return temp; 
-        } 
-         Node* temp = minValueNode(root->right); 
-        root->value = temp->value; 
-        root->right = HelpDelete(root->right, temp->value); 
-    } 
-    return root; 
-}
-Node*  Tree:: minValueNode( Node* node) 
-  { 
-     Node* current = node; 
-  
-    while (current->left != NULL) 
-        current = current->left; 
-  
-    return current; 
+Node* Tree:: Max(Node* root){
+
+    if(root==NULL)
+    return NULL;
+
+    while(root->right != NULL)
+    {
+        root = root->right;
+    }
+    return root;
 }
     bool Tree:: contains(int a){
+          if(Troot==NULL)return false;
                return HelpContains(Troot,a);
 
     }
      bool  Tree:: HelpContains(Node * root,int a)
    {
-       if(root==NULL)return false;
-       else{
-           if(a>root->value)HelpContains(root->right,a);
-           else if(a<root->value)HelpContains(root->left,a);
+       Node * help=root;
+       while(help!=NULL){
+          if(a>help->value)help=help->right;
+           else if(a<help->value)help=help->left;
            else
-           return true;
+           return true; 
        }
+          return false; 
+       
    }
     void Tree:: print(){
        
+    }
+    int main(){
+        Tree t;
+        t.insert(8);
+          t.insert(2);
+            t.insert(1);
+              t.insert(9);
+                t.insert(4);
+                  t.insert(4);
+                 t.insert(40);
+
+        cout<<t.size()<<endl;//6
+        
+         cout<<t.parent(1)<<endl;//2
+         
+        cout<<t.left(8)<<endl;//2
+         cout<<t.right(9)<<endl;//40
+        // t.remove(1);
+         // cout<<t.size()<<endl;//2
+ cout<<t.contains(1)<<endl;//true
+  cout<<t.contains(0)<<endl;//false
+   cout<<t.root()<<endl;//8
+    cout<<t.contains(1)<<endl;//true
+    t.remove(1);
+    cout<<t.contains(1)<<endl;//false
+    
+        return 0;
     }
