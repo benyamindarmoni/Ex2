@@ -240,30 +240,4 @@ Node* Tree:: Max(Node* root){
     void Tree:: print(){
        
     }
-    int main(){
-        Tree t;
-        t.insert(8);
-          t.insert(2);
-            t.insert(1);
-              t.insert(9);
-                t.insert(4);
-                  t.insert(4);
-                 t.insert(40);
-
-        cout<<t.size()<<endl;//6
-        
-         cout<<t.parent(1)<<endl;//2
-         
-        cout<<t.left(8)<<endl;//2
-         cout<<t.right(9)<<endl;//40
-        // t.remove(1);
-         // cout<<t.size()<<endl;//2
- cout<<t.contains(1)<<endl;//true
-  cout<<t.contains(0)<<endl;//false
-   cout<<t.root()<<endl;//8
-    cout<<t.contains(1)<<endl;//true
-    t.remove(1);
-    cout<<t.contains(1)<<endl;//false
-    
-        return 0;
-    }
+  
