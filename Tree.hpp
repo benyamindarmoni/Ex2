@@ -35,10 +35,10 @@ class Tree {
     void remove (int);
     bool contains(int);
     void print();
-    void HelpInsert(Node*,Node);
+    void HelpInsert(Node**,Node**);
     int HelpParent(Node * ,int );
-    Node* minValueNode( Node* ); 
-    Node* HelpDelete( Node* , int );
+   Node* Max(Node*);
+    void HelpDelete( Node* , int );
     bool HelpContains(Node*,int);
     
     };
