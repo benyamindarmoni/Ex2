@@ -49,17 +49,17 @@ int Tree::HelpParent(Node* root,int a)
     }
     
   //  delete(h);
- // throw std::invalid_argument( "didnt found the number" ); 
+  throw std::invalid_argument( "didnt found the number" ); 
     return 0;
 }
     int Tree:: parent(int a)
     {
         if(Troot==NULL){
-        //   throw std::invalid_argument( "tree is empty" ); 
+           throw std::invalid_argument( "tree is empty" ); 
            return 0;
         } 
     if(Troot->value==a){
-       // throw std::invalid_argument( "the number is the root!" );
+        throw std::invalid_argument( "the number is the root!" );
         return 0;
     }
             return HelpParent(Troot,a);
@@ -80,7 +80,7 @@ int Tree::HelpParent(Node* root,int a)
           
            
           
-     //  throw std::invalid_argument( "number doesnt exist!" );
+       throw std::invalid_argument( "number doesnt exist!" );
         return 0;
     }
     int Tree:: right(int a)
@@ -96,7 +96,7 @@ int Tree::HelpParent(Node* root,int a)
           
            
           
-     //  throw std:: invalid_argument( "number doesnt exist!" );
+       throw std:: invalid_argument( "number doesnt exist!" );
         return 0;
     }
     Node* Tree:: insert (int a)
@@ -128,7 +128,7 @@ int Tree::HelpParent(Node* root,int a)
 
             }
             else{
-                //throw std::invalid_argument( "number already exist!" );
+                throw std::invalid_argument( "number already exist!" );
                 size1--;
                 int a=0;
             }
