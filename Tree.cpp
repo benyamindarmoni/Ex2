@@ -1,6 +1,6 @@
 //Benyamon Darmoni , Danielle Zand
 #include "Tree.hpp"
-
+#include "badkan.hpp"
 using namespace std;
 using namespace ariel;
 Tree::Tree()
@@ -161,10 +161,9 @@ int Tree::HelpParent(Node* root,int a)
         throw std::invalid_argument( "number not found!" ); 
         
     }
-    void Tree:: HelpDelete(Node** root, int value) 
+    void Tree:: HelpDelete(Node** root, int d) 
     {   
-        
-  int found=0;
+        int found=0;
         if((*root)->value==d&&(*root)->left==NULL&&(*root)->right==NULL){
           
            
@@ -246,7 +245,6 @@ int Tree::HelpParent(Node* root,int a)
 
     }
 
-
 Node* Tree:: Max(Node* root,Node* f){
 if(root==NULL)
     return NULL;
@@ -278,3 +276,4 @@ if(root==NULL)
     void Tree:: print(){
        
     }
+   
