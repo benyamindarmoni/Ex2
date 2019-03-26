@@ -1,6 +1,5 @@
 //Benyamon Darmoni , Danielle Zand
 #include "Tree.hpp"
-#include "badkan.hpp"
 using namespace std;
 using namespace ariel;
 Tree::Tree()
