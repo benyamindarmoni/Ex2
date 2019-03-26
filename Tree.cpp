@@ -1,5 +1,6 @@
 //Benyamon Darmoni , Danielle Zand
 #include "Tree.hpp"
+
 using namespace std;
 using namespace ariel;
 Tree::Tree()
@@ -239,7 +240,8 @@ int Tree::HelpParent(Node* root,int a)
                  }
             }
             else{      //2 kids
-            Node* father=*root;
+       
+              Node* father=*root;
              t=Max(h->left,father);
               h->value=t->value;
              if(t->left!=NULL){
@@ -249,7 +251,11 @@ int Tree::HelpParent(Node* root,int a)
               break;
              }
              else
+            if(father->value==(*root)->value)
              father->left=NULL;
+            else{
+                 father->right=NULL;
+            }
              delete(t);
              
              break;
@@ -261,8 +267,8 @@ int Tree::HelpParent(Node* root,int a)
         if(found==0)throw std::invalid_argument( "number not found!" ); 
 
     }
-
-Node* Tree:: Max(Node* root,Node* f){
+    
+    Node* Tree:: Max(Node* root,Node* f){
 if(root==NULL)
     return NULL;
 
@@ -273,6 +279,8 @@ if(root==NULL)
     }
     return root;
 }
+
+
     bool Tree:: contains(int a){
           if(Troot==NULL)return false;
                return HelpContains(Troot,a);
