@@ -1,44 +1,46 @@
 //Benyamon Darmoni , Danielle Zand
-	#pragma once
+#pragma once
+
+#include <iostream>
+
+
+namespace ariel{
+   
+  class Node{
+    public:
+	int value;
+	Node *left;
+	Node *right;
+                 
+    Node(int);         //constractors
 	
+};
 
-	#include <iostream>
-	
+class Tree {
+  
+  Node* Troot;
 
-	
-
-	namespace ariel{
-	  struct Node{
-	    
-		int value;
-		Node *left;
-		Node *right;
-	};
-	
-
-	class Tree {
-	  
-	  Node* Troot;
-	
-
-	  public:
-	  Tree(Node);
-	  Tree();
-	  
-	    
-	    public:          //functions
-	    int size();
-	    int parent(int);
-	    int left(int);
-	    int right(int);
-	    Node* insert (int);
-	    int root();
-	    void remove (int);
-	    bool contains(int);
-	    void print();
-	    
-	    };
-	    
-	    
-	}
-
+  public:
+  Tree(Node);          //constractors
+  Tree();
+  
+    public:          //functions
+    int size();
+    int parent(int);
+    int left(int);
+    int right(int);
+    Node* insert (int);
+    int root();
+    void remove (int);
+    bool contains(int);
+    void print();
+    void HelpInsert(Node**,Node**);
+    int HelpParent(Node * ,int );
+   Node* Max(Node*,Node *);
+    void HelpDelete( Node** , int );
+    bool HelpContains(Node*,int);
+    int  HelpSize(Node*);
+    };
+    
+    
+}
