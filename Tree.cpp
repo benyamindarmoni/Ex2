@@ -77,7 +77,7 @@ int Tree::HelpParent(Node* root,int a)
                if(a>h->value)h=h->right;
                else if(a<h->value) h=h->left;
               else{
-                  if(h->left->value!=NULL)
+                  if(h->left!=NULL)
                   return h->left->value;
                   else
                   throw std:: invalid_argument( "left node is null!" );
@@ -97,7 +97,7 @@ int Tree::HelpParent(Node* root,int a)
                if(a>h->value)h=h->right;
                else if(a<h->value) h=h->left;
               else{
-                  if(h->right->value!=NULL)
+                  if(h->right!=NULL)
                   return h->right->value;
                   else
                   throw std:: invalid_argument( "right node is null!" );
