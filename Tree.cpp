@@ -168,11 +168,11 @@ int Tree::HelpParent(Node* root,int a)
 	c=Search(root,value);
 	if(root==NULL)
 		return ;
-	else if(value< root->data)
+	else if(value< root->value)
 	{
 		root->left= Delete(root->left,value);
 	}
-	else if(value> root->data)
+	else if(value> root->value)
 	{
 		root->right= Delete(root->right,value);
 	}
@@ -190,14 +190,14 @@ int Tree::HelpParent(Node* root,int a)
 		//case 2: one child
 		else if(root->left==NULL)
 		{
-			struct node* temp=root;
+			 Node* temp=root;
 			root=root->right;
 			delete temp;
 			return;
 		}
 		else if(root->right==NULL)
 		{
-			struct node* temp=root;
+			 Node* temp=root;
 			root=root->left;
 			delete temp;
 			return;
@@ -205,9 +205,9 @@ int Tree::HelpParent(Node* root,int a)
 		//case 3: 2 child
 		else
 		{
-			struct node*temp=findMin(root->right);
-			root->data=temp->data;
-			root->right=Delete(root->right,temp->data);
+			 Node*temp=findMin(root->right);
+			root->value=temp->value;
+			root->right=Delete(root->right,temp->value);
 		}
 	}
 	return;
