@@ -161,89 +161,59 @@ int Tree::HelpParent(Node* root,int a)
         throw std::invalid_argument( "number not found!" ); 
         
     }
-    void Tree:: HelpDelete(Node** root, int d) 
+    void Tree:: HelpDelete(Node** root, int value) 
     {   
-        int found=0;
-        if((*root)->value==d&&(*root)->left==NULL&&(*root)->right==NULL){
-          
-           
-           *root=NULL; 
-           found=1;
-          
-        }
         
-       
-        Node* h=*root;
-        Node* t=*root;
-        while(h!=NULL){
-          
-            if(d>h->value)
-            {
-                t=h;
-                h=h->right;
-        }
-        else if(d<h->value){
-             t=h;
-                h=h->left;
-        }
-        else{
-            found=1;
-            if(h->left==NULL&&h->right==NULL){ //no kids
-                
-                if(t->right->value==h->value)
-                t->right=NULL;
-                else
-                t->left=NULL;
-                delete(h);
-            }
-            else if(h->left==NULL){   //only right kid
-               if(t->right->value==h->value){
-                  t->right=h->right;
-                   delete(h);
-                
-                h=NULL;
-               }
-                 else{
-                     t->right=h->left;
-                   delete(h);
-                h=NULL; 
-                 }
-            }
-            else if(h->right==NULL){  //only left kid
-               if(t->right->value==h->value){
-                  t->right=h->left;
-                   delete(h);
-                h=NULL;
-               }
-                 else{
-                     t->left=h->left;
-                   delete(h);    
-                   h=NULL; 
-                 }
-            }
-            else{      //2 kids
-            Node* father=*root;
-             t=Max(h->left,father);
-              h->value=t->value;
-             if(t->left!=NULL){
-             t->value=t->left->value;
-              delete(t->left);
-              t->left=NULL;
-              break;
-             }
-             else
-             father->left=NULL;
-             delete(t);
-             
-             break;
-            }
-        }
-  
-        
-        }
-        if(found==0)throw std::invalid_argument( "number not found!" ); 
+ 
+	c=Search(root,value);
+	if(root==NULL)
+		return ;
+	else if(value< root->data)
+	{
+		root->left= Delete(root->left,value);
+	}
+	else if(value> root->data)
+	{
+		root->right= Delete(root->right,value);
+	}
+	
+	// Node deletion
+	else
+	{
+		//case 1: Leaf Node
+		if(root->left==NULL&&root->right==NULL)
+		{
+			delete root;
+			root=NULL;
+		return;
+		}
+		//case 2: one child
+		else if(root->left==NULL)
+		{
+			struct node* temp=root;
+			root=root->right;
+			delete temp;
+			return;
+		}
+		else if(root->right==NULL)
+		{
+			struct node* temp=root;
+			root=root->left;
+			delete temp;
+			return;
+		}
+		//case 3: 2 child
+		else
+		{
+			struct node*temp=findMin(root->right);
+			root->data=temp->data;
+			root->right=Delete(root->right,temp->data);
+		}
+	}
+	return;
 
-    }
+}
+
 
 Node* Tree:: Max(Node* root,Node* f){
 if(root==NULL)
