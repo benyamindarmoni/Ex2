@@ -161,19 +161,35 @@ int Tree::HelpParent(Node* root,int a)
         
     }
     void Tree:: HelpDelete(Node** root, int d) 
-    {   
+    { 
         int found=0;
-        if((*root)->value==d&&(*root)->left==NULL&&(*root)->right==NULL){
+        Node* h=*root;
+        Node* t=*root;
+        if(d==(*root)->value){
+            found=1;
+        if((*root)->right!=NULL&&(*root)->left==NULL){
           
+             *root=(*root)->right;
+             delete(h);
+             h=NULL;
+        }
+        if((*root)->left!=NULL&&(*root)->right==NULL){
+             *root=(*root)->left;
+             delete(h);
+              h=NULL;
+        }
+   
+        
+       
+        }
+         if(d==(*root)->value&&(*root)->left==NULL&&(*root)->right==NULL){
+        
            
            *root=NULL; 
            found=1;
-          
+          h=NULL;
         }
-        
        
-        Node* h=*root;
-        Node* t=*root;
         while(h!=NULL){
           
             if(d>h->value)
@@ -198,6 +214,8 @@ int Tree::HelpParent(Node* root,int a)
             else if(h->left==NULL){   //only right kid
                if(t->right->value==h->value){
                   t->right=h->right;
+              
+                  
                    delete(h);
                 
                 h=NULL;
@@ -275,4 +293,3 @@ if(root==NULL)
     void Tree:: print(){
        
     }
-   
