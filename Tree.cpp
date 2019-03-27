@@ -220,11 +220,13 @@ int Tree::HelpParent(Node* root,int a)
                    delete(h);
                 
                 h=NULL;
+                break;
                }
-                 else{
-                     t->right=h->left;
+                 if(h->value==t->left->value){
+                     t->left=h->right;
                    delete(h);
                 h=NULL; 
+                  break;
                  }
             }
             else if(h->right==NULL){  //only left kid
@@ -232,33 +234,36 @@ int Tree::HelpParent(Node* root,int a)
                   t->right=h->left;
                    delete(h);
                 h=NULL;
+                  break;
                }
-                 else{
+                 if(t->left->value==h->value){
                      t->left=h->left;
                    delete(h);    
                    h=NULL; 
+                     break;
                  }
             }
             else{      //2 kids
        
-              Node* father=*root;
-             t=Max(h->left,father);
+              Node* father=h;
+             t=Max(h->left,&father);
               h->value=t->value;
-             if(t->left!=NULL){
-             t->value=t->left->value;
-              delete(t->left);
-              t->left=NULL;
-              break;
-             }
-             else
-            if(father->value==(*root)->value)
-             father->left=NULL;
-            else{
-                 father->right=NULL;
+            if(father==h){
+                h->left=t->left;
+                delete t;
+                 
             }
-             delete(t);
-             
-             break;
+            else{
+                if(t->left!=NULL){
+                    father->right=t->left;
+                }
+                else{
+                    father->right=NULL;
+                    
+                }
+                delete t;
+            } 
+            break;
             }
         }
   
@@ -268,13 +273,13 @@ int Tree::HelpParent(Node* root,int a)
 
     }
     
-    Node* Tree:: Max(Node* root,Node* f){
+    Node* Tree:: Max(Node* root,Node** f){
 if(root==NULL)
     return NULL;
 
     while(root->right != NULL)
     {
-        f=root;
+        *f=root;
         root = root->right;
     }
     return root;
@@ -299,5 +304,27 @@ if(root==NULL)
        
    }
     void Tree:: print(){
-       
+        print2DUtil(Troot, 0);
     }
+    void Tree:: print2DUtil(Node *root, int space)  
+{  
+    // Base case  
+    if (root == NULL)  
+        return;  
+  
+    // Increase distance between levels  
+    space += 10;  
+  
+    // Process right child first  
+    print2DUtil(root->right, space);  
+  
+    // Print current node after space  
+    // count  
+    cout<<endl;  
+    for (int i = 10; i < space; i++)  
+        cout<<" ";  
+    cout<<root->value<<"\n";  
+  
+    // Process left child  
+    print2DUtil(root->left, space);  
+} 
