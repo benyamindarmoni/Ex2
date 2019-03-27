@@ -213,7 +213,7 @@ int Tree::HelpParent(Node* root,int a)
                 delete(h);
             }
             else if(h->left==NULL){   //only right kid
-               if(t->right->value==h->value){
+               if(t->right!=NULL&&t->right->value==h->value){
                   t->right=h->right;
               
                   
@@ -222,7 +222,7 @@ int Tree::HelpParent(Node* root,int a)
                 h=NULL;
                 break;
                }
-                 if(h->value==t->left->value){
+                 if(t->left!=NULL&&h->value==t->left->value){
                      t->left=h->right;
                    delete(h);
                 h=NULL; 
@@ -230,13 +230,13 @@ int Tree::HelpParent(Node* root,int a)
                  }
             }
             else if(h->right==NULL){  //only left kid
-               if(t->right->value==h->value){
+               if(t->right!=NULL&&t->right->value==h->value){
                   t->right=h->left;
                    delete(h);
                 h=NULL;
                   break;
                }
-                 if(t->left->value==h->value){
+                 if(t->left!=NULL&&t->left->value==h->value){
                      t->left=h->left;
                    delete(h);    
                    h=NULL; 
@@ -304,7 +304,7 @@ if(root==NULL)
        
    }
     void Tree:: print(){
-      //  print2DUtil(Troot, 0);
+        print2DUtil(Troot, 0);
     }
     void Tree:: print2DUtil(Node *root, int space)  
 {  
