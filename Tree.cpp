@@ -304,7 +304,7 @@ if(root==NULL)
        
    }
     void Tree:: print(){
-        print2DUtil(Troot, 0);
+      //  print2DUtil(Troot, 0);
     }
     void Tree:: print2DUtil(Node *root, int space)  
 {  
