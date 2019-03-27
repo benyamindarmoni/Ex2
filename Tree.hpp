@@ -23,7 +23,7 @@ class Tree {
   public:
   Tree(Node);          //constractors
   Tree();
-  
+  ~Tree();
     public:          //functions
     int size();
     int parent(int);
@@ -41,6 +41,7 @@ class Tree {
     bool HelpContains(Node*,int);
     int  HelpSize(Node*);
     void print2DUtil(Node* , int ); 
+    void HelpMemory(Node* );
      };
     
     
