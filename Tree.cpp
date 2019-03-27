@@ -15,6 +15,21 @@ Node:: Node (int a)
     value=a;
     right=left=NULL;
 }
+Tree::~Tree(){
+    if(Troot!=NULL){
+        HelpMemory(Troot);
+    }
+    std::cout << "Tree deleted!" << std::endl;
+}
+void Tree:: HelpMemory(Node* a){
+     if(a==NULL)
+        return;
+
+   
+    HelpMemory(a->left);
+    HelpMemory(a->right);
+     delete a;
+}
   int Tree:: size()
  {
    
@@ -50,7 +65,7 @@ int Tree::HelpParent(Node* root,int a)
        
     }
     
-  //  delete(h);
+
   throw std::invalid_argument( "didnt found the number" ); 
     return 0;
 }
