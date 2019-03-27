@@ -1,6 +1,5 @@
 //Benyamon Darmoni , Danielle Zand
 #include "Tree.hpp"
-
 using namespace std;
 using namespace ariel;
 Tree::Tree()
@@ -206,7 +205,7 @@ int Tree::HelpParent(Node* root,int a)
             found=1;
             if(h->left==NULL&&h->right==NULL){ //no kids
                 
-                if(t->right->value==h->value)
+                if(t->right!=NULL&&t->right->value==h->value)
                 t->right=NULL;
                 else
                 t->left=NULL;
