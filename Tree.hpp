@@ -36,11 +36,12 @@ class Tree {
     void print();
     void HelpInsert(Node**,Node**);
     int HelpParent(Node * ,int );
-   Node* Max(Node*,Node *);
-    void HelpDelete( Node** , int );
+   Node* Max(Node*,Node**);
+   void HelpDelete( Node** , int );
     bool HelpContains(Node*,int);
     int  HelpSize(Node*);
-    };
+    void print2DUtil(Node* , int ); 
+     };
     
     
 }
