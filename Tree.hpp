@@ -1,4 +1,4 @@
-//Benyamןn Darmoni , Danielle Zand
+//Benyamin Darmoni , Danielle Zand
 #pragma once
 
 #include <iostream>
