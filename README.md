@@ -1,2 +1,2 @@
-בנימין דרמוני,
-דניאל זנד
+בנימין דרמוני, Benyamin Darmoni
+ Danielle Zand, דניאל זנד
