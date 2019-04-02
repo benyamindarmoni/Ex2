@@ -320,7 +320,7 @@ if(root==NULL)
     void Tree:: print(){
         print2DUtil(Troot, 0);
     }
-    void Tree:: print2DUtil(Node *root, int space)  
+    void Tree:: print2DUtil(Node *root, int space)   //we took this function from geeks for geeks website
 {  
     // Base case  
     if (root == NULL)  
